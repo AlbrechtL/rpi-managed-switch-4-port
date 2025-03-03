@@ -1,0 +1,80 @@
+(footprint "screw_hole"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "Ref**"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(uuid "d8b4584f-c556-42f9-aa0f-7dbdbec4070c")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Val**"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "5d46b0db-006a-4b3f-9ea4-281dbf2239cb")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4f3e32b6-8d0e-4e30-9103-d32ade735549")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6866022d-172f-463d-8fb5-d704e50aa0f0")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "7b6be82c-0830-4e50-b5bd-afe19da5d15e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "" np_thru_hole circle
+		(at 0 0)
+		(size 2.75 2.75)
+		(drill 2.75)
+		(layers "*.Cu" "*.Mask")
+		(solder_mask_margin 1.725)
+		(clearance 1.725)
+		(uuid "e9da4147-18bc-4cfa-804d-9b8e861f6b8b")
+	)
+	(group ""
+		(uuid "c1a83700-66ed-45da-9ded-0fc73fe02064")
+		(members "4f3e32b6-8d0e-4e30-9103-d32ade735549" "5d46b0db-006a-4b3f-9ea4-281dbf2239cb"
+			"6866022d-172f-463d-8fb5-d704e50aa0f0" "7b6be82c-0830-4e50-b5bd-afe19da5d15e"
+			"d8b4584f-c556-42f9-aa0f-7dbdbec4070c" "e9da4147-18bc-4cfa-804d-9b8e861f6b8b"
+		)
+	)
+)
