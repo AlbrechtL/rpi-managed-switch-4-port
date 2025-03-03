@@ -38,6 +38,7 @@ https://github.com/openwrt/openwrt/compare/main...AlbrechtL:rpi-managed-switch-o
 To communicate with the RTL8367S switch chip, two different Linux drivers are available:  
 
 **1. OpenWrt swconfig**
+
 Driver: `drivers/net/phy/rtl8367b.c`
 * Pros:  
   - Full hardware offloading support  
@@ -50,6 +51,7 @@ OpenWrt Screenshot
 ![OpenWrt swconfig](pictures/openwrt-switch-screenshot.png)  
 
 **2. Distributed Switch Architecture (DSA)**
+
 Driver: `drivers/net/dsa/realtek/rtl8365mb.c`
 * Pros:  
   - Integrated into the Linux kernel  
