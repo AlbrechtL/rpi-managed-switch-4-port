@@ -19,7 +19,8 @@ An open-source 4-port gigabit managed switch HAT based on a Raspberry Pi with Op
 * VLAN support (only on OpenWrt with swconfig)
 * Hardware offloading support (only on OpenWrt with swconfig)
 * Hardware design in KiCad
-* Ready for JLCPCB production  
+* Ready for JLCPCB production
+  - Using a much as possible basic parts to lower the assembling costs
 
 ## Software Status
 
