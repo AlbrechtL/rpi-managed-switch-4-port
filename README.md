@@ -63,7 +63,9 @@ Driver: `drivers/net/dsa/realtek/rtl8365mb.c`
   - No VLAN support  
 
 There was a discussion on the Linux kernel mailing list about the missing hardware offloading and VLAN support:  
-https://lkml.iu.edu/hypermail/linux/kernel/2407.0/01589.html  
+https://lkml.iu.edu/hypermail/linux/kernel/2407.0/01589.html
+
+I played a bit with the driver but with no success (details see here https://github.com/AlbrechtL/rtl8365mb-kernel-hacking).
 
 Working DSA Example:
 ```
