@@ -106,7 +106,11 @@ root@OpenWrt:~# ip addr
 
 I have two assembled PCBs that have basic functionality. See [issues](https://github.com/AlbrechtL/rpi-managed-switch-4-port/issues) for a list of hardware problems.
 
+**Raspberry Pi Zero**
 ![4 Port Managed Switch Top](pictures/switch-top.jpg)
+
+**Raspberry Pi 5**
+![4 Port Managed Switch Top](pictures/switch-top-rpi5.jpg)
 
 ## Performance
 
