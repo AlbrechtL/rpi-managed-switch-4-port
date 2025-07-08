@@ -24,8 +24,7 @@ An open-source 4-port gigabit managed switch HAT based on a Raspberry Pi with Op
 
 ## Software Status
 
-The hardware works with a modified OpenWrt:  
-https://github.com/AlbrechtL/rpi-managed-switch-openwrt/tree/rpi_managed_switch
+The hardware works with a modified OpenWrt: https://github.com/AlbrechtL/openwrt/tree/rpi_managed_switch
 
 I added the following to OpenWrt:  
 * Two device tree overlays (for swconfig and DSA)  
@@ -34,7 +33,7 @@ I added the following to OpenWrt:
 * Added detection of swconfig or DSA in the first boot scripts so that OpenWrt uses the switch  
 
 See the differences:  
-https://github.com/openwrt/openwrt/compare/main...AlbrechtL:rpi-managed-switch-openwrt:rpi_managed_switch  
+https://github.com/openwrt/openwrt/compare/main...AlbrechtL:openwrt:rpi_managed_switch  
 
 To communicate with the RTL8367S switch chip, two different Linux drivers are available:  
 
