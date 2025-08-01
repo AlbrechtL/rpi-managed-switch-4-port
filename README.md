@@ -84,8 +84,8 @@ root@OpenWrt:~# ip addr
        valid_lft forever preferred_lft forever
 ```
 
-OpenWrt swconfig screenshot  
-![OpenWrt swconfig](pictures/openwrt-switch-screenshot-dsa.png)  
+OpenWrt DSA screenshot  
+![OpenWrt dsa](pictures/openwrt-switch-screenshot-dsa.png)  
 
 **1. OpenWrt swconfig**
 
