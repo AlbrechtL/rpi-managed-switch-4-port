@@ -13,9 +13,7 @@ An open-source 4-port gigabit managed switch HAT based on a Raspberry Pi with Op
   - Tested with a Raspberry Pi Zero 1  
   - Raspberry Pi 5 is not working with OpenWrt due to this [issue](https://github.com/openwrt/openwrt/issues/18034)  
 * Works with a [custom OpenWrt](https://github.com/AlbrechtL/rpi-managed-switch-openwrt/tree/rpi_managed_switch)  
-* Two overlays:  
-  1. For Linux [Distributed Switch Architecture (DSA)](https://www.kernel.org/doc/Documentation/networking/dsa/dsa.txt)  
-  2. For OpenWrt [swconfig](https://openwrt.org/docs/techref/swconfig)  
+* Supported by Linux [Distributed Switch Architecture (DSA)](https://www.kernel.org/doc/Documentation/networking/dsa/dsa.txt)  
 * VLAN support
 * Switching hardware offloading support 
 * Hardware design in KiCad
@@ -24,32 +22,32 @@ An open-source 4-port gigabit managed switch HAT based on a Raspberry Pi with Op
 
 ## Software Status
 
-The hardware works with a modified OpenWrt: https://github.com/AlbrechtL/openwrt/tree/rpi_managed_switch
+The hardware works with a adapted OpenWrt: https://github.com/AlbrechtL/openwrt/tree/rpi_managed_switch
 
 I added the following to OpenWrt:  
-* Two device tree overlays (for swconfig and DSA)  
-* Enabled the ENC28J60 driver  
+* Device tree overlays for DSA
+* Enabled the ENC28J60 driver 
 * Added a small patch to enable the ENC28J60 for DSA  
-* Added detection of swconfig or DSA in the first boot scripts so that OpenWrt uses the switch  
+* Added detection of DSA in the first boot scripts so that OpenWrt uses the switch  
 
 See the differences:  
 https://github.com/openwrt/openwrt/compare/main...AlbrechtL:openwrt:rpi_managed_switch  
 
-To communicate with the RTL8367S switch chip, two different Linux drivers are available:  
+Communication with the RTL8367S switch chip uses Linux DSA. There is also an OpenWrt-specific driver (`drivers/net/phy/rtl8367b.c`) for OpenWrt's legacy `swconfig` framework, but since OpenWrt is moving to DSA, it does not make sense to use it in this project. That said, this driver does work with this switch.
 
-**1. Distributed Switch Architecture (DSA)**
+**Distributed Switch Architecture (DSA)**
 
-Driver: `drivers/net/dsa/realtek/rtl8365mb.c`
-* Pros:  
+The to go Linux driver is: `drivers/net/dsa/realtek/rtl8365mb.c`
+* Key aspects:
   - Integrated into the Linux kernel  
   - Mainline RTL8367S support  
   - Works on Raspberry Pi OS with a custom Linux kernel
-* Cons:
-  - Hardware offloading and VLAN support only via patch (see https://github.com/AlbrechtL/openwrt/commit/a1c16e23b97d4cd1c184bd464960a6b93470e16a)
-  - There was a discussion on the Linux kernel mailing list about the missing hardware offloading and VLAN support (https://lkml.iu.edu/hypermail/linux/kernel/2407.0/01589.html)
-  - OpenWrt driver discussion (https://forum.openwrt.org/t/reduce-number-of-drivers-for-rtl8367s/237681)
+  - Actively maintained
+  - Hardware offloading and VLAN support
+    - May be added into Linux 7.2 (https://lore.kernel.org/all/20260606-realtek_forward-v13-0-b9e409687cbe@gmail.com/)
+    - Available in mainline OpenWrt (https://github.com/openwrt/openwrt/pull/23738)
 
-Working DSA Example:
+DSA Example:
 ```
 root@OpenWrt:~# ip addr
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000
@@ -87,19 +85,6 @@ root@OpenWrt:~# ip addr
 OpenWrt DSA screenshot  
 ![OpenWrt dsa](pictures/openwrt-switch-screenshot-dsa.png)  
 
-**1. OpenWrt swconfig**
-
-Driver: `drivers/net/phy/rtl8367b.c`
-* Pros:  
-  - Full hardware offloading support  
-  - VLAN support  
-* Cons:  
-  - OpenWrt-specific  
-  - OpenWrt is transitioning from swconfig to DSA  
-
-OpenWrt swconfig screenshot  
-![OpenWrt swconfig](pictures/openwrt-switch-screenshot.png)  
-
 ## Hardware Status
 
 I have two assembled PCBs that have basic functionality. See [issues](https://github.com/AlbrechtL/rpi-managed-switch-4-port/issues) for a list of hardware problems.
@@ -113,10 +98,9 @@ I have two assembled PCBs that have basic functionality. See [issues](https://gi
 ## Performance
 
 I don't have detailed performance measurements yet, but here are some bandwidth indications:  
-* **RJ45–RJ45 with DSA (rtl8365mb) and offloading patch:** ~1 Gbit/s (wire speed, full-duplex)   
+* **RJ45–RJ45 with DSA (rtl8365mb) and offloading patches:** ~1 Gbit/s (wire speed, full-duplex)   
 * **RJ45–RJ45 with DSA (rtl8365mb):** ~2 Mbit/s  
   Currently, the RTL8367S DSA driver doesn't support hardware offloading. As a result, all traffic is routed through the Raspberry Pi and the very slow SPI interface. For a switch, this is not acceptable.  
-* **RJ45–RJ45 with OpenWrt swconfig (rtl8367b):** ~1 Gbit/s (wire speed, full-duplex)  
 * **Raspberry Pi to RJ45 (CPU port):** ~5 Mbit/s (half-duplex)  
   To support the inexpensive Raspberry Pi Zero, an external SPI Ethernet chip (ENC28J60) is used to connect to the main switch chip (RTL8367S). Due to the slow SPI interface, only ~5 Mbit/s can be achieved. However, for a managed web interface, that's sufficient.  
 
